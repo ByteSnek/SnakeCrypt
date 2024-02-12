@@ -1,63 +1,75 @@
 <html>
-  <head>
-    <title>SnekCrypt</title>
-    <link rel="shortcut icon" href="img/snekcrypt.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
+<head>
+    <title>SnakeCrypt</title>
+    <link rel="shortcut icon" href="img/snakecrypt.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js"></script>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
 
-  <body>
-    <br />
-    <div class="container">
-      <main>
+<body>
+<br/>
+<div class="container">
+    <main>
         <section>
-          <h1>SnakeCrypt</h1>
-          <a href="https://github.com/SnakerBone/SnakeCrypt" target="_blank" class="badge badge-dark">Made by SnakerBone</a>
+            <h1>SnakeCrypt</h1>
+            <a href="https://github.com/SnakerBone/SnakeCrypt" target="_blank" class="badge text-bg-dark" style="text-decoration: none">Made by SnakerBone</a>
         </section>
         <hr>
         <section>
-          <div>
-            <p>Type</p>
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Codec Type</button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" id="Sx10" onclick="setSx10()" style="cursor: pointer;">Sx10 (default)</a>
-                <a class="dropdown-item" id="Sx16" onclick="setSx16()" style="cursor: pointer;">Sx16</a>
-              </div>
-            </div>
-            <p></p>
-          </div>
-          <div>
-            <p>Input</p>
-            <textarea class="form-control" id="in"></textarea>
-            <p></p>
-          </div>
-          <hr />
-          <div>
-            <p>Output</p>
-            <textarea class="form-control" readonly id="out"></textarea>
             <div>
-              <p></p>
-              <button class="btn btn-secondary" onclick="encode()">Encode</button>
-              <button class="btn btn-info" onclick="decode()">Decode</button>
-              <div>
-                <br />
-                <button class="btn btn-danger" onclick="clearFlds()">Clear Buffer</button>
-              </div>
+                <p>Encryption Method</p>
+                <div class="dropdown">
+                    <button id="selection" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Select</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" id="ten" onclick="setRadixTen()" style="cursor: pointer;">(<i>x</i>)<sub>10</sub></a></li>
+                        <li><a class="dropdown-item" id="sixteen" onclick="setRadixSixteen()" style="cursor: pointer;">(<i>x</i>)<sub>16</sub></a></li>
+                    </ul>
+                </div>
+                <p></p>
             </div>
-          </div>
+            <hr>
+            <div>
+                <p>Encryption Key (optional)</p>
+                <input type="password" class="form-control" id="key">
+                <p></p>
+            </div>
+            <hr>
+            <div>
+                <p>Load Input File (optional)</p>
+                <div style="display: flex;">
+                    <input class="form-control" type="file" id="file">
+                    <button class="btn btn-primary" onclick="loadFile()" id="upload" style="margin-left: 10px">Load</button>
+                </div>
+                <p></p>
+                <p>Input</p>
+                <textarea class="form-control" id="in"></textarea>
+                <p></p>
+            </div>
+            <hr/>
+            <div>
+                <p>Output</p>
+                <textarea class="form-control" readonly id="out"></textarea>
+                <div>
+                    <p></p>
+                    <button class="btn btn-primary" id="encrypt" onclick="encode()">Encrypt</button>
+                    <button class="btn btn-primary" id="decrypt" onclick="decode()">Decrypt</button>
+                    <p></p>
+                    <div>
+                        <button class="btn btn-info" id="copy" onclick="copyOutput()">Copy</button>
+                        <button class="btn btn-info" id="download" onclick="downloadOutput()">Download</button>
+                        <p></p>
+                        <button class="btn btn-danger" id="clear" onclick="clearFields()">Clear</button>
+                    </div>
+                </div>
+            </div>
         </section>
-        <hr />
-        <section>
-          <zero-md src="/SxInfo.md"></zero-md>
-        </section>
-      </main>
-    </div>
-    <script src="Sx64.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+    </main>
+</div>
+<script src="main.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
 </html>
