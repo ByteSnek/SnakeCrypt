@@ -2,7 +2,7 @@
 
 https://codec.snaker.xyz
 
-### License
+## License
 
 Licensed under [DBaJ v2](https://github.com/CoFH/CoFHCore/blob/1.20.x/README.md) 
 
