@@ -1,6 +1,6 @@
 /**
  *  Created by SnakerBone on 20/11/2023.
- *  Licensed under MIT.
+ *  Licensed under DBaJ v2. See https://snaker.xyz/pages/license
  **/
 
 let CodecSerializer = (function ()
@@ -479,7 +479,8 @@ function setRadixSixteen()
 
 function finalizeType(codecType)
 {
-    const selection = document.getElementById("selection");
+    const tenOption = document.getElementById('ten');
+    const sixteenOption = document.getElementById('sixteen');
 
     if (codecType !== CodecType.UNSET)
     {
@@ -491,17 +492,26 @@ function finalizeType(codecType)
     {
         case CodecType.UNSET:
         {
-            selection.textContent = "Select";
             break;
         }
         case CodecType.TEN:
         {
-            selection.textContent = document.getElementById("ten").textContent;
+            if (sixteenOption.hasAttribute('checked')) {
+                sixteenOption.removeAttribute('checked');
+            }
+
+            tenOption.setAttribute('checked', '');
+            
             break;
         }
         case CodecType.SIXTEEN:
         {
-            selection.textContent = document.getElementById("sixteen").textContent;
+            if (tenOption.hasAttribute('checked')) {
+                tenOption.removeAttribute('checked');
+            }
+
+            sixteenOption.setAttribute('checked', '');
+
             break;
         }
         default:
