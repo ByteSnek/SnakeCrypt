@@ -1,6 +1,4 @@
-# Codec
-
-https://codec.snaker.xyz
+# https://codec.snaker.xyz
 
 ## License
 
